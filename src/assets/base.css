@@ -63,6 +63,8 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 50%;
+  background: #dfe9ff !important;
+
   /* color: var(--color-text); */
   /* background: var(--vt-c-white-mute) !important; */
   transition: color 0.5s, background-color 0.5s;
@@ -360,12 +362,12 @@ button {
   display: inline-block;
 }
 
-button:hover,
 button:active {
-  -webkit-transform: translateY(-5px);
-  -ms-transform: translateY(-7px);
-  -o-transform: translateY(-7px);
-  transform: translateY(-7px);
+  -webkit-transform: translateY(2px);
+  -ms-transform: translateY(2px);
+  -o-transform: translateY(2px);
+  background-color: #1f2e61;
+  transform: translateY(2px);
   box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
@@ -388,7 +390,7 @@ button:active {
 }
 
 .card p {
-  color: #989dc5;
+  color: #eef0ff;
   font-size: 1rem;
   line-height: 1.5;
 }
@@ -396,15 +398,6 @@ button:active {
 .card .card-link {
   position: absolute;
   bottom: 18px;
-}
-
-button:hover {
-  -webkit-transform: translateY(-5px);
-  -ms-transform: translateY(-7px);
-  -o-transform: translateY(-7px);
-  transform: translateY(-7px);
-  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.15);
-  cursor: pointer;
 }
 
 .card .card-icon {

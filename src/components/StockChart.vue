@@ -7,20 +7,23 @@
 import { createChart, type IChartApi } from "lightweight-charts";
 import { onMounted, onUnmounted } from "vue";
 
+function resize(width: number, height: number) {
+  if (chart) chart.resize(width, height);
+}
+
 let chart: IChartApi | null;
 // if (container) {
 onMounted(() => {
   const chartOptions = {
     layout: {
-      background: { color: "#222" },
-      textColor: "#DDD",
+      background: { color: "#dfe9ff" },
+      textColor: "#ef452f",
     },
     grid: {
       vertLines: { color: "#444" },
       horzLines: { color: "#444" },
     },
-    width: 200,
-    height: 200,
+    height: 400,
   };
   const chartContainer = document.getElementById("chartContainer");
   if (chartContainer) {
@@ -86,6 +89,17 @@ onMounted(() => {
         close: 111.26,
       },
     ]);
+
+    const ro = new ResizeObserver((entries) => {
+      const cr = entries[0].contentRect;
+      resize(cr.width, cr.height);
+    });
+
+    ro.observe(chartContainer);
+
+    window.addEventListener("resize", () => {
+      resize(chartContainer.offsetWidth, chartContainer.offsetHeight);
+    });
 
     chart.timeScale().fitContent();
   }

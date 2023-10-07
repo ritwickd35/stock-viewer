@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const instrument: string | null = null;
 function onInstrumentSelected(event) {
-  alert(instrument);
+  // alert(instrument);
 }
 </script>
 
@@ -26,9 +26,9 @@ function onInstrumentSelected(event) {
             </div>
           </section>
         </div>
-        <div class="col-md-6 py-5 my-5">
+        <div class="col-md-6 py-md-5 my-md-5 py-xs-2 my-xs-2S">
           <form @submit.prevent="onInstrumentSelected" class="form-inline row">
-            <div class="form-group mb-2 col-sm-6">
+            <div class="form-group mb-2 col-12">
               <input
                 type="text"
                 id="staticEmail2"
@@ -37,8 +37,38 @@ function onInstrumentSelected(event) {
                 placeholder="Enter Instrument Name"
               />
             </div>
-            <button type="submit" class="btn btn-primary mb-2 col-sm-6">
-              View Chart
+            <div class="col-6">
+              <div class="form-check">
+                <input
+                  name="interval"
+                  class="form-check-input"
+                  type="radio"
+                  value="hourly"
+                  id="flexCheckDefault"
+                />
+                <label class="form-check-label" for="flexCheckDefault">
+                  Hourly
+                </label>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-check">
+                <input
+                  name="interval"
+                  class="form-check-input"
+                  type="radio"
+                  value="daily"
+                  id="flexCheckChecked"
+                  checked
+                />
+                <label class="form-check-label" for="flexCheckChecked">
+                  Daily
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary mb-2 col-12 py-2 my-2">
+              <small>View Chart</small>
             </button>
           </form>
         </div>
