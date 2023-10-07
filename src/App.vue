@@ -1,25 +1,27 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
-import TheWelcome from "./components/TheWelcome.vue";
+import InstrumentPicker from "./components/InstrumentPicker.vue";
+import StockChart from "./components/StockChart.vue";
 </script>
 
 <template>
   <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="./assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img alt="Vue logo" class="logo" src="./assets/logo.svg" />
+          <h1 class="green">Stock Viewer</h1>
+        </div>
+        <div class="col-md-6 py-5">
+          <div class="wrapper">
+            <InstrumentPicker />
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
   <main>
-    <TheWelcome />
+    <StockChart />
   </main>
 </template>
 
