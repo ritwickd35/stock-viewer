@@ -19,7 +19,8 @@ onMounted(() => {
       vertLines: { color: "#444" },
       horzLines: { color: "#444" },
     },
-    height: 400,
+    width: 200,
+    height: 200,
   };
   const chartContainer = document.getElementById("chartContainer");
   if (chartContainer) {

@@ -60,8 +60,11 @@
 
 body {
   min-height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 50%;
   /* color: var(--color-text); */
-  background: #222 !important;
+  /* background: var(--vt-c-white-mute) !important; */
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -197,95 +200,6 @@ nav .arrow-down {
   border-left: 15px solid transparent;
   border-right: 15px solid transparent;
   border-top: 15px solid #fff;
-}
-
-.banner {
-  height: auto;
-  margin: 32px 0px;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-}
-
-@media (min-width: 768px) {
-  .banner {
-    height: 300px;
-    margin-bottom: 16px;
-  }
-}
-
-.banner .banner-image {
-  position: absolute;
-  opacity: 0.25;
-  right: 0px;
-  top: 0px;
-  height: 300px;
-  z-index: -1;
-  -webkit-filter: drop-shadow(0 3rem 0.05rem #bfd8ff);
-  filter: drop-shadow(0 3rem 0.05rem #bfd8ff);
-}
-
-@media (min-width: 768px) {
-  .banner .banner-image {
-    display: inherit;
-    height: 400px;
-    top: 0px;
-    opacity: 0.5;
-  }
-}
-
-@media (min-width: 992px) {
-  .banner .banner-image {
-    height: 500px;
-    top: -50px;
-    opacity: 1;
-  }
-}
-
-.banner .banner-text {
-  max-width: 550px;
-  float: left;
-}
-
-.banner .banner-text h1 {
-  color: #00106a;
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: 3px;
-  margin-bottom: 1rem;
-}
-
-.banner .banner-text p {
-  color: #00106a;
-  font-size: 1.05rem;
-  line-height: 1.75;
-}
-
-.banner button {
-  border: 0;
-  border-radius: 50px;
-  padding: 0.75rem 2.75rem;
-  background: #4b71ff;
-  color: #ffffff;
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.25);
-  cursor: pointer;
-  position: relative;
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 1px;
-  -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out;
-}
-
-.banner button:hover {
-  -webkit-transform: translateY(-2px);
-  -ms-transform: translateY(-2px);
-  -o-transform: translateY(-2px);
-  transform: translateY(-2px);
-  box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.25);
 }
 
 .mb-30 {
@@ -432,12 +346,12 @@ nav .arrow-down {
   height: 35px;
   background: rgb(184, 189, 189);
 }
-/* a {
+a {
   border-radius: 30px !important;
   transition: all 0.3s ease-in-out;
 }
 a:link,
-a:visited {
+button {
   background-color: #4b71ff;
   color: white;
   padding: 19px 55px;
@@ -446,8 +360,8 @@ a:visited {
   display: inline-block;
 }
 
-a:hover,
-a:active {
+button:hover,
+button:active {
   -webkit-transform: translateY(-5px);
   -ms-transform: translateY(-7px);
   -o-transform: translateY(-7px);
@@ -457,7 +371,7 @@ a:active {
 }
 a:active {
   background-color: #82a0e2;
-} */
+}
 button:active {
   background-color: #7aa8e4 !important;
 }
