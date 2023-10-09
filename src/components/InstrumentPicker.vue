@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const instrument: string | null = null;
-function onInstrumentSelected(event) {
+function onInstrumentSelected() {
   // alert(instrument);
 }
 </script>
