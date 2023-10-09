@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, type Ref } from "vue";
+import { onMounted, onUnmounted, ref, watch, type Ref } from "vue";
 import { store } from "./store";
+import { useToast } from "primevue/usetoast";
+import { showToast } from "../services/toastService";
 
-const instrument: Ref<string | null> = ref(null);
+const toast = useToast();
+
+const instrument: Ref<string | null> = ref("Select the instrument");
 const instruments = ref([]);
 const interval = ref("hourly");
 
@@ -16,8 +20,17 @@ onMounted(() => {
     });
 });
 
+// watch(store, ({ instrument, interval }, oldValue) => {
+//   console.log("got changes ion chart", oldValue);
+
+// });
+
 function onInstrumentSelected() {
-  store.value = { instrument: instrument.value, interval: interval.value };
+  store.value = {
+    instrument: instrument.value,
+    interval: interval.value,
+    dataLoading: true,
+  };
 }
 </script>
 
@@ -60,7 +73,7 @@ function onInstrumentSelected() {
               </select>
             </div>
             <div class="col-6">
-              <div class="form-check">
+              <div class="form-check mx-3">
                 <input
                   name="interval"
                   class="form-check-input"
@@ -76,7 +89,7 @@ function onInstrumentSelected() {
               </div>
             </div>
             <div class="col-6">
-              <div class="form-check">
+              <div class="form-check mx-3">
                 <input
                   name="interval"
                   class="form-check-input"
@@ -91,8 +104,28 @@ function onInstrumentSelected() {
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary mb-2 col-12 py-2 my-2">
-              <small>View Chart</small>
+            <button
+              type="submit"
+              class="btn btn-primary mb-2 col-12 py-2 my-2"
+              style="height: 70px"
+              :disabled="instrument === 'Select the instrument'"
+            >
+              <h3 style="display: inline-block; position: relative; top: 2px">
+                View Chart
+              </h3>
+              <div
+                class="spinner-border text-light mx-2"
+                role="status"
+                style="
+                  padding-top: 13px;
+                  top: 6px;
+                  left: 10px;
+                  position: relative;
+                "
+                v-if="store.dataLoading"
+              >
+                <span class="sr-only"></span>
+              </div>
             </button>
           </form>
         </div>

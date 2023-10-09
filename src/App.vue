@@ -4,8 +4,10 @@ import StockChart from "./components/StockChart.vue";
 </script>
 
 <template>
+  <Toast></Toast>
   <div class="container">
     <InstrumentPicker />
+
     <StockChart />
   </div>
 </template>
