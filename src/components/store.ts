@@ -1,6 +1,11 @@
 import { ref } from "vue";
 
-export const store = ref({
+type store = {
+  instrument: string | null;
+  instrument: string | null;
+};
+
+export const store: Ref<store> = ref({
   instrument: null,
   interval: null,
 });

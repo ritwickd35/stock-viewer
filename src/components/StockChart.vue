@@ -5,7 +5,18 @@
 
 <script setup lang="ts">
 import { store } from "./store";
-import { createChart, type IChartApi } from "lightweight-charts";
+import {
+  createChart,
+  type CandlestickData,
+  type CandlestickSeriesOptions,
+  type CandlestickStyleOptions,
+  type DeepPartial,
+  type IChartApi,
+  type ISeriesApi,
+  type SeriesOptionsCommon,
+  type Time,
+  type WhitespaceData,
+} from "lightweight-charts";
 import { onMounted, onUnmounted, watch } from "vue";
 
 function resize(width: number, height: number) {
@@ -13,7 +24,13 @@ function resize(width: number, height: number) {
 }
 
 let chart: IChartApi | null;
-let candlestickSeries;
+let candlestickSeries: ISeriesApi<
+  "Candlestick",
+  Time,
+  CandlestickData<Time> | WhitespaceData<Time>,
+  CandlestickSeriesOptions,
+  DeepPartial<CandlestickStyleOptions & SeriesOptionsCommon>
+>;
 let volumeSeries;
 
 const serverURL = import.meta.env.VITE_SERVER_URL;
