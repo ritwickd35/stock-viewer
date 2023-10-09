@@ -1,7 +1,23 @@
 <script setup lang="ts">
-const instrument: string | null = null;
+import { onMounted, onUnmounted, ref, type Ref } from "vue";
+import { store } from "./store";
+
+const instrument: Ref<string | null> = ref(null);
+const instruments = ref([]);
+const interval = ref("hourly");
+
+onMounted(() => {
+  const serverURL = import.meta.env.VITE_SERVER_URL;
+  console.log(serverURL);
+  fetch(serverURL + "/instruments")
+    .then((res) => res.json())
+    .then((data) => {
+      instruments.value = data;
+    });
+});
+
 function onInstrumentSelected() {
-  // alert(instrument);
+  store.value = { instrument: instrument.value, interval: interval.value };
 }
 </script>
 
@@ -20,7 +36,10 @@ function onInstrumentSelected() {
                   >
                   This tool helps you view all your financial instruments and
                   allows you to download a record of them for saving. This tool
-                  uses lightweight charts and is based on canvas.
+                  uses lightweight charts and is based on canvas element. Select
+                  the instrument you want to view from the dropdown. You can see
+                  both hourly and daily data for the instrument you have
+                  selected.
                 </p>
               </div>
             </div>
@@ -29,13 +48,16 @@ function onInstrumentSelected() {
         <div class="col-md-6 py-md-5 my-md-5 py-xs-2 my-xs-2S">
           <form @submit.prevent="onInstrumentSelected" class="form-inline row">
             <div class="form-group mb-2 col-12">
-              <input
-                type="text"
-                id="staticEmail2"
-                class="form-control"
+              <select
+                class="form-select form-select-lg mb-3"
+                aria-label=".form-select-lg example"
                 v-model="instrument"
-                placeholder="Enter Instrument Name"
-              />
+              >
+                <option disabled :selected="true">Select the instrument</option>
+                <option v-for="instrument of instruments" :value="instrument">
+                  {{ instrument }}
+                </option>
+              </select>
             </div>
             <div class="col-6">
               <div class="form-check">
@@ -45,6 +67,8 @@ function onInstrumentSelected() {
                   type="radio"
                   value="hourly"
                   id="flexCheckDefault"
+                  checked
+                  v-model="interval"
                 />
                 <label class="form-check-label" for="flexCheckDefault">
                   Hourly
@@ -59,7 +83,7 @@ function onInstrumentSelected() {
                   type="radio"
                   value="daily"
                   id="flexCheckChecked"
-                  checked
+                  v-model="interval"
                 />
                 <label class="form-check-label" for="flexCheckChecked">
                   Daily
