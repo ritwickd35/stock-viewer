@@ -1,0 +1,11 @@
+version: '3.3'
+
+services:
+
+  stock_fe:
+    container_name: stock-viewer
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '5173:5173'
