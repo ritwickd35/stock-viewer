@@ -1,30 +1,44 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch, type Ref } from "vue";
-import { store } from "./store";
+import { store } from "../dataStore/store";
 import { useToast } from "primevue/usetoast";
 import { showToast } from "../services/toastService";
 
+// for toast notifications
 const toast = useToast();
 
-const instrument: Ref<string | null> = ref("Select the instrument");
-const instruments = ref([]);
+// local component state
+const instrument: Ref<string> = ref("Select the instrument");
+const instruments: Ref<never[] | string[]> = ref([]);
 const interval = ref("hourly");
 
 onMounted(() => {
+  // fetches the available instruments on mount
   const serverURL = import.meta.env.VITE_SERVER_URL;
   console.log(serverURL);
   fetch(serverURL + "/instruments")
     .then((res) => res.json())
     .then((data) => {
       instruments.value = data;
+    })
+    .catch((err) => {
+      showToast(toast, "error", "Error", err.message, 2000);
+      instruments.value = [
+        "AAPL",
+        "GOOGL",
+        "AMZN",
+        "MSFT",
+        "TSLA",
+        "FB",
+        "NVDA",
+        "NFLX",
+        "BRK",
+        "V",
+      ];
     });
 });
 
-// watch(store, ({ instrument, interval }, oldValue) => {
-//   console.log("got changes ion chart", oldValue);
-
-// });
-
+// update the instrument selection in store for data fetching
 function onInstrumentSelected() {
   store.value = {
     instrument: instrument.value,
@@ -158,3 +172,4 @@ h3 {
   }
 }
 </style>
+../dataStore/store
