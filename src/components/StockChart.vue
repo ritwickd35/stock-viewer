@@ -1,6 +1,8 @@
 <template>
   <div class="row">
-    <h3 style="font-family: monospace" class="green">Regenerate mock data</h3>
+    <h3 style="font-family: monospace" class="green my-2">
+      Regenerate mock data
+    </h3>
     <form @submit.prevent="regenerateData">
       <div class="row">
         <div class="col">
@@ -52,7 +54,7 @@
         </div>
       </div>
     </form>
-    <div class="col-12 my-2" v-if="chartDrawn">
+    <div class="col-12 my-4" v-if="chartDrawn">
       <h3 style="font-family: monospace" class="green">Stock Details</h3>
       <div id="chartContainer"></div>
     </div>
@@ -118,8 +120,6 @@ let instrumentChart: string | null = null;
 // watcher triggers when the selected instrument or the interval changes
 // renders charts
 watch(store, ({ instrument, interval, dataLoading }, oldValue) => {
-  console.log("got changes ion chart", oldValue);
-
   if (interval && instrument && dataLoading) {
     instrumentChart = instrument;
     fetchDataAndDraw(interval, instrument);
@@ -175,8 +175,6 @@ function fetchDataAndDraw(interval: string, instrument: string) {
 
             volumeSeries.setData(volumeArr);
           }
-
-          // if (chart) chart.timeScale().fitContent();
         });
       }
     })
@@ -320,7 +318,8 @@ function drawChart() {
             )
           );
           toolTip.style.left = clientX + 20 + "px";
-          toolTip.style.top = clientY + 20 + "px";
+          toolTip.style.top =
+            clientY + (20 + 290000 / window.innerWidth) + "px";
         }
 
         clearTimeout(timeout);
@@ -345,7 +344,7 @@ socket.on("connect", () => {
     toast,
     "info",
     "Socket connected",
-    "Socket connected to backend",
+    "Socket connection established with server",
     2000
   );
 });
@@ -357,23 +356,9 @@ socket.on("mock-data", ({ err, success }) => {
       toast,
       "info",
       "Data Generation Complete",
-      "Data generation has been completed.",
-      2000
+      "Data generation has been completed. Refetch to see the new data",
+      4000
     );
-    if (
-      store.value.interval &&
-      store.value.instrument &&
-      !store.value.dataLoading
-    ) {
-      fetchDataAndDraw(store.value.interval, store.value.instrument);
-      showToast(
-        toast,
-        "success",
-        "Data Fetching Complete",
-        "Newly generated data has been fetched",
-        2000
-      );
-    }
   }
 });
 </script>
