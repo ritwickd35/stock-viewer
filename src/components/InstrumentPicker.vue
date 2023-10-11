@@ -66,9 +66,9 @@ function onInstrumentSelected() {
                   uses lightweight charts and is based on canvas element. Select
                   the instrument you want to view from the dropdown. You can see
                   both hourly and daily data for the instrument you have
-                  selected. If the data in not appropriate,
+                  selected.
                   <strong
-                    >this tool also allows you to regenerate the data on the
+                    >This tool also allows you to regenerate the data on the
                     backend side</strong
                   >. <br /><br />
                   Both daily and hourly data can be regenerated,
@@ -78,11 +78,11 @@ function onInstrumentSelected() {
                     of datapoints to be generated</strong
                   >. Once the points have been generated, the client will be
                   informed via sockets of the completion of the data generation
-                  task and will try to reload the new data. However, please note
-                  that generating a lot of data points, although supported, may
-                  slow down the server and lead to unresponsiveness. This is
-                  solely a limitation of the resources of the server the code is
-                  deployed in(GCP free-tier in this case)
+                  task. Please note that generating a lot of data points,
+                  although supported, may slow down the server due to resource
+                  limitation of the cloud service the server the code is
+                  deployed in(GCP free-tier in this case). Try out the various
+                  options below!
                 </p>
               </div>
             </div>
